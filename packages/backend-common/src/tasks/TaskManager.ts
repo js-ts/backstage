@@ -15,12 +15,15 @@
  */
 
 import { Config } from '@backstage/config';
+import { Knex } from 'knex';
 import { memoize } from 'lodash';
+import { Duration } from 'luxon';
 import { Logger } from 'winston';
 import { DatabaseManager } from '../database';
 import { migrateBackendCommon } from '../database/migrateBackendCommon';
 import { getRootLogger } from '../logging';
 import { PluginTaskManagerImpl } from './PluginTaskManagerImpl';
+import { PluginTaskManagerJanitor } from './PluginTaskManagerJanitor';
 import { PluginTaskManager } from './types';
 
 /**
@@ -52,7 +55,16 @@ export class TaskManager {
   forPlugin(pluginId: string): PluginTaskManager {
     const databaseFactory = memoize(async () => {
       const knex = await this.databaseManager.forPlugin(pluginId).getClient();
+
       await migrateBackendCommon(knex);
+
+      const janitor = new PluginTaskManagerJanitor({
+        knex,
+        waitBetweenRuns: Duration.fromObject({ minutes: 1 }),
+        logger: this.logger,
+      });
+      janitor.start();
+
       return knex;
     });
 
