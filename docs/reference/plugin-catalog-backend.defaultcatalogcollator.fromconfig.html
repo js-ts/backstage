@@ -10,6 +10,7 @@
 <p><b>Signature:</b></p>
 <pre><code class="hljs css language-typescript"><span class="hljs-keyword">static</span> fromConfig(_config: Config, options: {
         discovery: PluginEndpointDiscovery;
+        tokenManager: TokenManager;
         filter?: CatalogEntitiesRequest[<span class="hljs-string">'filter'</span>];
     }): DefaultCatalogCollator;
 </code></pre>
@@ -20,7 +21,7 @@
 </thead>
 <tbody>
 <tr><td>_config</td><td><a href="/docs/reference/config.config">Config</a></td><td></td></tr>
-<tr><td>options</td><td>{ discovery: <a href="/docs/reference/backend-common.pluginendpointdiscovery">PluginEndpointDiscovery</a><!-- -->; filter?: <a href="/docs/reference/catalog-client.catalogentitiesrequest">CatalogEntitiesRequest</a><!-- -->['filter']; }</td><td></td></tr>
+<tr><td>options</td><td>{ discovery: <a href="/docs/reference/backend-common.pluginendpointdiscovery">PluginEndpointDiscovery</a><!-- -->; tokenManager: <a href="/docs/reference/backend-common.tokenmanager">TokenManager</a><!-- -->; filter?: <a href="/docs/reference/catalog-client.catalogentitiesrequest">CatalogEntitiesRequest</a><!-- -->['filter']; }</td><td></td></tr>
 </tbody>
 </table>
 <p><b>Returns:</b></p>

@@ -23,6 +23,7 @@
 <tr><td><a href="/docs/reference/backend-common.git">Git</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/backend-common.githuburlreader">GithubUrlReader</a></td><td>A processor that adds the ability to read files from GitHub v3 APIs, such as the one exposed by GitHub itself.</td></tr>
 <tr><td><a href="/docs/reference/backend-common.gitlaburlreader">GitlabUrlReader</a></td><td></td></tr>
+<tr><td><a href="/docs/reference/backend-common.servertokenmanager">ServerTokenManager</a></td><td>Creates and validates tokens for use during backend-to-backend authentication.</td></tr>
 <tr><td><a href="/docs/reference/backend-common.singlehostdiscovery">SingleHostDiscovery</a></td><td>SingleHostDiscovery is a basic PluginEndpointDiscovery implementation that assumes that all plugins are hosted in a single deployment.<!-- -->The deployment may be scaled horizontally, as long as the external URL is the same for all instances. However, internal URLs will always be resolved to the same host, so there won't be any balancing of internal traffic.</td></tr>
 <tr><td><a href="/docs/reference/backend-common.urlreaders">UrlReaders</a></td><td>UrlReaders provide various utilities related to the UrlReader interface.</td></tr>
 </tbody>
@@ -41,6 +42,7 @@
 <tr><td><a href="/docs/reference/backend-common.errorhandler">errorHandler(options)</a></td><td>Express middleware to handle errors during request processing.<!-- -->This is commonly the very last middleware in the chain.<!-- -->Its primary purpose is not to do translation of business logic exceptions, but rather to be a global catch-all for uncaught &quot;fatal&quot; errors that are expected to result in a 500 error. However, it also does handle some common error types (such as http-error exceptions) and returns the enclosed status code accordingly.</td></tr>
 <tr><td><a href="/docs/reference/backend-common.getrootlogger">getRootLogger()</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/backend-common.getvoidlogger">getVoidLogger()</a></td><td>A logger that just throws away all messages.</td></tr>
+<tr><td><a href="/docs/reference/backend-common.isdatabaseconflicterror">isDatabaseConflictError(e)</a></td><td>Tries to deduce whether a thrown error is a database conflict.</td></tr>
 <tr><td><a href="/docs/reference/backend-common.loadbackendconfig">loadBackendConfig(options)</a></td><td>Load configuration for a Backend.<!-- -->This function should only be called once, during the initialization of the backend.</td></tr>
 <tr><td><a href="/docs/reference/backend-common.notfoundhandler">notFoundHandler()</a></td><td>Express middleware to handle requests for missing routes.<!-- -->Should be used as the very last handler in the chain, as it unconditionally returns a 404 status.</td></tr>
 <tr><td><a href="/docs/reference/backend-common.requestlogginghandler">requestLoggingHandler(logger)</a></td><td>Logs incoming requests.</td></tr>
@@ -63,6 +65,7 @@
 <tr><td><a href="/docs/reference/backend-common.plugindatabasemanager">PluginDatabaseManager</a></td><td>The PluginDatabaseManager manages access to databases that Plugins get.</td></tr>
 <tr><td><a href="/docs/reference/backend-common.readtreeresponsefactory">ReadTreeResponseFactory</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/backend-common.statuscheckhandleroptions">StatusCheckHandlerOptions</a></td><td></td></tr>
+<tr><td><a href="/docs/reference/backend-common.tokenmanager">TokenManager</a></td><td>Interface for creating and validating tokens.</td></tr>
 </tbody>
 </table>
 <h2><a class="anchor" aria-hidden="true" id="variables"></a><a href="#variables" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variables</h2>
@@ -85,17 +88,19 @@
 <tr><td><a href="/docs/reference/backend-common.cacheclientoptions">CacheClientOptions</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/backend-common.cacheclientsetoptions">CacheClientSetOptions</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/backend-common.cachemanageroptions">CacheManagerOptions</a></td><td></td></tr>
+<tr><td><a href="/docs/reference/backend-common.databasemanageroptions">DatabaseManagerOptions</a></td><td>Configuration options object.</td></tr>
 <tr><td><a href="/docs/reference/backend-common.errorhandleroptions">ErrorHandlerOptions</a></td><td></td></tr>
+<tr><td><a href="/docs/reference/backend-common.fromreadablearrayoptions">FromReadableArrayOptions</a></td><td>Options that control <a href="/docs/reference/backend-common.readtreeresponsefactory.fromreadablearray">ReadTreeResponseFactory.fromReadableArray()</a> execution.</td></tr>
 <tr><td><a href="/docs/reference/backend-common.plugincachemanager">PluginCacheManager</a></td><td>The PluginCacheManager manages access to cache stores that Plugins get.</td></tr>
 <tr><td><a href="/docs/reference/backend-common.pluginendpointdiscovery">PluginEndpointDiscovery</a></td><td>The PluginEndpointDiscovery is used to provide a mechanism for backend plugins to discover the endpoints for itself or other backend plugins.<!-- -->The purpose of the discovery API is to allow for many different deployment setups and routing methods through a central configuration, instead of letting each individual plugin manage that configuration.<!-- -->Implementations of the discovery API can be as simple as a URL pattern using the pluginId, but could also have overrides for individual plugins, or query a separate discovery service.</td></tr>
-<tr><td><a href="/docs/reference/backend-common.readerfactory">ReaderFactory</a></td><td>A factory function that can read config to construct zero or more UrlReaders along with a predicate for when it should be used.</td></tr>
-<tr><td><a href="/docs/reference/backend-common.readtreeoptions">ReadTreeOptions</a></td><td>An options object for readTree operations.</td></tr>
-<tr><td><a href="/docs/reference/backend-common.readtreeresponse">ReadTreeResponse</a></td><td>A response object for readTree operations.</td></tr>
-<tr><td><a href="/docs/reference/backend-common.readtreeresponsediroptions">ReadTreeResponseDirOptions</a></td><td></td></tr>
-<tr><td><a href="/docs/reference/backend-common.readtreeresponsefactoryoptions">ReadTreeResponseFactoryOptions</a></td><td></td></tr>
-<tr><td><a href="/docs/reference/backend-common.readtreeresponsefile">ReadTreeResponseFile</a></td><td>Represents a single file in a readTree response.</td></tr>
+<tr><td><a href="/docs/reference/backend-common.readerfactory">ReaderFactory</a></td><td>A factory function that can read config to construct zero or more <a href="/docs/reference/backend-common.urlreader">UrlReader</a><!-- -->s along with a predicate for when it should be used.</td></tr>
+<tr><td><a href="/docs/reference/backend-common.readtreeoptions">ReadTreeOptions</a></td><td>An options object for  operations.</td></tr>
+<tr><td><a href="/docs/reference/backend-common.readtreeresponse">ReadTreeResponse</a></td><td>A response object for  operations.</td></tr>
+<tr><td><a href="/docs/reference/backend-common.readtreeresponsediroptions">ReadTreeResponseDirOptions</a></td><td>Options that control  execution.</td></tr>
+<tr><td><a href="/docs/reference/backend-common.readtreeresponsefactoryoptions">ReadTreeResponseFactoryOptions</a></td><td>Options that control execution of <a href="/docs/reference/backend-common.readtreeresponsefactory">ReadTreeResponseFactory</a> methods.</td></tr>
+<tr><td><a href="/docs/reference/backend-common.readtreeresponsefile">ReadTreeResponseFile</a></td><td>Represents a single file in a  response.</td></tr>
 <tr><td><a href="/docs/reference/backend-common.readurloptions">ReadUrlOptions</a></td><td>An options object for readUrl operations.</td></tr>
-<tr><td><a href="/docs/reference/backend-common.readurlresponse">ReadUrlResponse</a></td><td>A response object for readUrl operations.</td></tr>
+<tr><td><a href="/docs/reference/backend-common.readurlresponse">ReadUrlResponse</a></td><td>A response object for  operations.</td></tr>
 <tr><td><a href="/docs/reference/backend-common.requestlogginghandlerfactory">RequestLoggingHandlerFactory</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/backend-common.runcontaineroptions">RunContainerOptions</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/backend-common.searchoptions">SearchOptions</a></td><td>An options object for search operations.</td></tr>
@@ -104,7 +109,7 @@
 <tr><td><a href="/docs/reference/backend-common.servicebuilder">ServiceBuilder</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/backend-common.statuscheck">StatusCheck</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/backend-common.urlreader">UrlReader</a></td><td>A generic interface for fetching plain data from URLs.</td></tr>
-<tr><td><a href="/docs/reference/backend-common.urlreaderpredicatetuple">UrlReaderPredicateTuple</a></td><td></td></tr>
+<tr><td><a href="/docs/reference/backend-common.urlreaderpredicatetuple">UrlReaderPredicateTuple</a></td><td>A predicate that decides whether a specific <a href="/docs/reference/backend-common.urlreader">UrlReader</a> can handle a given URL.</td></tr>
 <tr><td><a href="/docs/reference/backend-common.urlreadersoptions">UrlReadersOptions</a></td><td></td></tr>
 </tbody>
 </table>

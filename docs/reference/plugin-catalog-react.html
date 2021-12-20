@@ -38,6 +38,8 @@
 <tr><td><a href="/docs/reference/plugin-catalog-react.getentityrelations">getEntityRelations(entity, relationType, filter)</a></td><td>Get the related entity references.</td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-react.getentitysourcelocation">getEntitySourceLocation(entity, scmIntegrationsApi)</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-react.isownerof">isOwnerOf(owner, owned)</a></td><td>Get the related entity references.</td></tr>
+<tr><td><a href="/docs/reference/plugin-catalog-react.loadcatalogownerrefs">loadCatalogOwnerRefs(catalogApi, identityOwnerRefs)</a></td><td>Takes the relevant parts of the User entity corresponding to the Backstage identity, and translates them into a list of entity refs on string form that represent the user's ownership connections.</td></tr>
+<tr><td><a href="/docs/reference/plugin-catalog-react.loadidentityownerrefs">loadIdentityOwnerRefs(identityApi)</a></td><td>Takes the relevant parts of the Backstage identity, and translates them into a list of entity refs on string form that represent the user's ownership connections.</td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-react.reducecatalogfilters">reduceCatalogFilters(filters)</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-react.reduceentityfilters">reduceEntityFilters(filters)</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-react.useentity">useEntity()</a></td><td>Grab the current entity from the context and its current loading state.</td></tr>
@@ -45,6 +47,7 @@
 <tr><td><a href="/docs/reference/plugin-catalog-react.useentitylistprovider">useEntityListProvider()</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-react.useentityownership">useEntityOwnership()</a></td><td>Returns a function that checks whether the currently signed-in user is an owner of a given entity. When the hook is initially mounted, the loading flag will be true and the results returned from the function will always be false.</td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-react.useentitytypefilter">useEntityTypeFilter()</a></td><td>A hook built on top of <code>useEntityListProvider</code> for enabling selection of valid <code>spec.type</code> values based on the selected EntityKindFilter.</td></tr>
+<tr><td><a href="/docs/reference/plugin-catalog-react.useownedentities">useOwnedEntities(allowedKinds)</a></td><td>Takes the relevant parts of the Backstage identity, and translates them into a list of entities which are owned by the user. Takes an optional parameter to filter the entities based on allowedKinds</td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-react.useownuser">useOwnUser()</a></td><td>Get the catalog User entity (if any) that matches the logged-in user.</td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-react.userelatedentities">useRelatedEntities(entity, { type, kind })</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-react.usestarredentities">useStarredEntities()</a></td><td></td></tr>
@@ -115,6 +118,7 @@
 <tr><td><a href="/docs/reference/plugin-catalog-react.defaultentityfilters">DefaultEntityFilters</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-react.entityfilter">EntityFilter</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-react.entitysourcelocation">EntitySourceLocation</a></td><td></td></tr>
+<tr><td><a href="/docs/reference/plugin-catalog-react.entitytypefilterprops">EntityTypeFilterProps</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-react.userlistfilterkind">UserListFilterKind</a></td><td></td></tr>
 </tbody>
 </table>

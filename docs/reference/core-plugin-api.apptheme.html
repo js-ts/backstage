@@ -15,6 +15,9 @@
     variant: <span class="hljs-string">'light'</span> | <span class="hljs-string">'dark'</span>;
     theme: BackstageTheme;
     icon?: React.ReactElement;
+    Provider?(props: {
+        children: ReactNode;
+    }): JSX.Element | <span class="hljs-literal">null</span>;
 };
 </code></pre>
 <p><b>References:</b> <a href="/docs/reference/theme.backstagetheme">BackstageTheme</a></p>

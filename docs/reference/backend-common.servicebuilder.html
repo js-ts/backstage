@@ -24,6 +24,8 @@
     }): ServiceBuilder;
     addRouter(root: <span class="hljs-built_in">string</span>, router: Router | RequestHandler): ServiceBuilder;
     setRequestLoggingHandler(requestLoggingHandler: RequestLoggingHandlerFactory): ServiceBuilder;
+    setErrorHandler(errorHandler: ErrorRequestHandler): ServiceBuilder;
+    disableDefaultErrorHandler(): ServiceBuilder;
     start(): <span class="hljs-built_in">Promise</span>&lt;Server&gt;;
 };
 </code></pre>
